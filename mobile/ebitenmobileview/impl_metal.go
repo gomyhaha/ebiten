@@ -1,4 +1,4 @@
-// Copyright 2016 Hajime Hoshi
+// Copyright 2019 The Ebiten Authors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,31 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// +build darwin freebsd js linux windows
-// +build !android
-// +build !ios
+// +build darwin,ios,arm darwin,ios,arm64
 
 package ebitenmobileview
 
 import (
-	"github.com/hajimehoshi/ebiten"
+	"github.com/hajimehoshi/ebiten/internal/graphicsdriver/metal"
 )
 
-// Empty implementation of this package.
-// Package mobile is buildable for non-mobile platforms so that godoc can show comments.
-
-func update() error {
-	return nil
-}
-
-func start(f func(*ebiten.Image) error, width, height int, scale float64) {
-}
-
-func updateTouchesOnAndroid(action int, id int, x, y int) {
-}
-
-func updateTouchesOnIOSImpl(phase int, ptr int64, x, y int) {
-}
-
 func setUIView(uiview uintptr) {
+	metal.Get().SetUIView(uiview)
 }
