@@ -34,24 +34,24 @@ const (
 )
 
 func init() {
-	flag.Usage = func() {
+	flag.Usage = func() { //设置新的 usage 提示函数
 		// This message is copied from `gomobile bind -h`
 		fmt.Fprintf(os.Stderr, "%s bind [-target android|ios] [-bootclasspath <path>] [-classpath <path>] [-o output] [build flags] [package]", ebitenmobileCommand)
 		os.Exit(2)
 	}
-	flag.Parse()
+	flag.Parse() //命令行参数的解析
 }
 
 func goEnv(name string) string {
-	if val := os.Getenv(name); val != "" {
+	if val := os.Getenv(name); val != "" { //由 env 的 name 得到 value
 		return val
 	}
-	gocmd := filepath.Join(runtime.GOROOT(), "bin", "go")
-	val, err := exec.Command(gocmd, "env", name).Output()
+	gocmd := filepath.Join(runtime.GOROOT(), "bin", "go") // 获得 goroot/bin/go
+	val, err := exec.Command(gocmd, "env", name).Output() // 运行 go env name 获得结果
 	if err != nil {
 		panic(err)
 	}
-	return strings.TrimSpace(string(val))
+	return strings.TrimSpace(string(val)) // 取得空格后 return
 }
 
 const (
