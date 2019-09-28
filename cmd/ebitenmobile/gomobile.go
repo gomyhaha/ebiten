@@ -60,14 +60,14 @@ func runGo(args ...string) error {
 }
 
 func prepareGomobileCommands() error {
-	tmp, err := ioutil.TempDir("", "ebitenmobile-")
+	tmp, err := ioutil.TempDir("", "ebitenmobile-") //新建 /tmp/ebitenmobile-????
 	if err != nil {
 		return err
 	}
 
-	newpath := filepath.Join(tmp, "bin")
+	newpath := filepath.Join(tmp, "bin") //新建 /tmp/ebitemmobile-????/bin
 	if path := os.Getenv("PATH"); path != "" {
-		newpath += string(filepath.ListSeparator) + path
+		newpath += string(filepath.ListSeparator) + path //PATH: newpath:PATH
 	}
 	if buildX || buildN {
 		fmt.Printf("PATH=%s\n", newpath)
